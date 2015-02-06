@@ -51,12 +51,14 @@ public class Main {
 					outPath));
 			while ((line = br.readLine()) != null) {
 				String stringBoard[][] = null;
+				int whoWon = 0;
 
 				// Read in the file here (probably a for loop that's been
 				// unrolled in 1 direction)
 				// Don't forget that the last column is an eval of who won.
+				
 
-				Board newBoard = new Board(stringBoard);
+				Board newBoard = new Board(stringBoard,whoWon);
 				newBoard.evaluate();
 
 				// write now back to the file

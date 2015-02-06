@@ -13,14 +13,17 @@ public class Board {
 	private String[][] board = null;
 	
 	private String[] evaluation = null;
+	private int whoWon = 0;
 	
 	/**
 	 * Constructor for the board class, takes in a 2D array for the board
 	 * Automatically evaluates the board
 	 * @param newBoard
 	 */
-	public Board(String[][] newBoard){
+	public Board(String[][] newBoard, int winner){
 		this.setBoard(newBoard);
+		this.setWhoWon(winner);
+		
 	}
 	
 	/**
@@ -69,6 +72,20 @@ public class Board {
 	 */
 	private void setBoard(String[][] board) {
 		this.board = board;
+	}
+
+	/**
+	 * @return the whoWon
+	 */
+	public int getWhoWon() {
+		return whoWon;
+	}
+
+	/**
+	 * @param whoWon the whoWon to set
+	 */
+	private void setWhoWon(int whoWon) {
+		this.whoWon = whoWon;
 	}
 
 }
