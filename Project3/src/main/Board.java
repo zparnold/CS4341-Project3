@@ -10,18 +10,18 @@ package main;
 public class Board {
 	
 	//Class vars
-	private String[][] board = null;
+	private int[][] board = null;
 	
-	private String[] evaluation = null;
+	private int[] evaluation = null;
 	private int whoWon = 0;
 	
 	/**
 	 * Constructor for the board class, takes in a 2D array for the board
 	 * Automatically evaluates the board
-	 * @param newBoard
+	 * @param stringBoard
 	 */
-	public Board(String[][] newBoard, int winner){
-		this.setBoard(newBoard);
+	public Board(int[][] stringBoard, int winner){
+		this.setBoard(stringBoard);
 		this.setWhoWon(winner);
 		
 	}
@@ -49,29 +49,29 @@ public class Board {
 	/**
 	 * @return the evaluation
 	 */
-	public String[] getEvaluation() {
+	public int[] getEvaluation() {
 		return evaluation;
 	}
 
 	/**
 	 * @param evaluation the evaluation to set
 	 */
-	private void setEvaluation(String[] evaluation) {
+	private void setEvaluation(int[] evaluation) {
 		this.evaluation = evaluation;
 	}
 
 	/**
 	 * @return the board
 	 */
-	public String[][] getBoard() {
+	public int[][] getBoard() {
 		return board;
 	}
 
 	/**
-	 * @param board the board to set
+	 * @param stringBoard the board to set
 	 */
-	private void setBoard(String[][] board) {
-		this.board = board;
+	private void setBoard(int[][] stringBoard) {
+		this.board = stringBoard;
 	}
 
 	/**
