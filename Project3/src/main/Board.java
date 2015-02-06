@@ -35,7 +35,9 @@ public class Board {
 		//How many 2 in a rows the person has (vertically, horizontally)
 		
 		//Who went first
-		
+
+		// How many total pieces are on the board (inverse relationship, the
+		// more there are, the lower the heuristic
 		
 	}
 	
