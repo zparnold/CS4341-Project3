@@ -21,7 +21,6 @@ public class Board {
 	 */
 	public Board(String[][] newBoard){
 		this.setBoard(newBoard);
-		this.evaluate();
 	}
 	
 	/**

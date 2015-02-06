@@ -4,8 +4,10 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -46,6 +48,14 @@ public class Main {
 					//Don't forget that the last column is an eval of who won.
 					
 					Board newBoard = new Board(stringBoard);
+					newBoard.evaluate();
+					
+					//write now back to the file
+					BufferedWriter writer = new BufferedWriter(new FileWriter("../files/out.csv"));
+					writer.write(line);
+					writer.write(newBoard.getEvaluation().toString());
+					writer.newLine();
+					writer.close();
 				}
 		 
 			} catch (FileNotFoundException e) {
