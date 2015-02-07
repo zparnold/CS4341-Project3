@@ -285,8 +285,8 @@ public class Board {
 		System.out.println("player1MiddleCount: " + player1MiddleCount);
 		System.out.println("player2MiddleCount: " + player2MiddleCount);
 
-		System.out.println("p1possibleConnect4: " + p1possibleConnect4);
-		System.out.println("p2possibleConnect4: " + p2possibleConnect4);
+		System.out.println("player1possibleConnect4: " + p1possibleConnect4);
+		System.out.println("player2possibleConnect4: " + p2possibleConnect4);
 
 		System.out.println("player1RowDominance: " + player1RowDominance);
 		System.out.println("player2RowDominance: " + player2RowDominance);
@@ -341,6 +341,7 @@ public class Board {
 		}
 		
 		//Going left. If less than 0, break.
+		currentStreak = 1;
 		for(int i = searchDepth; i >= 0; i--){
 			if(y - i < 0 || (board[x][y - i] != player && board[x][y - i] > 0)){
 				break;
@@ -357,6 +358,7 @@ public class Board {
 		
 		//Vertical
 		//Going Down. If greater than board width, break
+		currentStreak = 1;
 		for(int i = 1; i <= searchDepth; i++){
 			if(x + i >= BOARD_HEIGHT || (board[x + i][y] != player && board[x + i][y] > 0)){
 				break;
@@ -372,6 +374,7 @@ public class Board {
 		}
 		
 		//Going Up. If less than 0, break.
+		currentStreak = 1;
 		for(int i = searchDepth; i >= 0; i--){
 			if(x - i < 0 || (board[x - i][y] != player && board[x - i][y] > 0)){
 				break;
