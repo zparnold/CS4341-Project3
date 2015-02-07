@@ -47,6 +47,8 @@ public class Board {
 		int player2TwoInARows = 0;
 		int player1ThreeInARows = 0;
 		int player2ThreeInARows = 0;
+		int player1TotalCount = 0;
+		int player2TotalCount = 0;
 
 		// Count Horizontal pieces in a row
 		for (int i = 0; i < BOARD_HEIGHT; i++) {
@@ -58,14 +60,16 @@ public class Board {
 			for (int j = 0; j < BOARD_WIDTH; j++) {
 
 				if (board[i][j] == 1) {
+					player1TotalCount++;
 					try {
 						if (((j + 1) < BOARD_WIDTH) && board[i][j + 1] == 1) {
 
 							if (((j + 2) < BOARD_WIDTH) && board[i][j + 2] == 1) {
 								player1ThreeStreak++;
-							} else if (((j + 2) < BOARD_WIDTH) && board[i][j + 2] == 0) {
+							} else if (((j + 2) < BOARD_WIDTH)
+									&& board[i][j + 2] == 0) {
 								player1TwoStreak++;
-							} else{
+							} else {
 								player1TwoStreak++;
 							}
 						}
@@ -73,15 +77,17 @@ public class Board {
 						continue;
 					}
 				} else if (board[i][j] == 2) {
+					player2TotalCount++;
 					try {
 						if (((j + 1) < BOARD_WIDTH) && board[i][j + 1] == 2) {
 
 							if (((j + 2) < BOARD_WIDTH) && board[i][j + 2] == 2) {
 								player2ThreeStreak++;
 
-							} else if (((j + 2) < BOARD_WIDTH) && board[i][j + 2] == 0) {
+							} else if (((j + 2) < BOARD_WIDTH)
+									&& board[i][j + 2] == 0) {
 								player2TwoStreak++;
-							} else{
+							} else {
 								player2TwoStreak++;
 							}
 						}
@@ -100,71 +106,74 @@ public class Board {
 		}
 
 		// Count VERTICAL pieces in a row
-				for (int i = 0; i < BOARD_HEIGHT; i++) {
-					int player1TwoStreak = 0;
-					int player1ThreeStreak = 0;
-					int player2TwoStreak = 0;
-					int player2ThreeStreak = 0;
+		for (int i = 0; i < BOARD_HEIGHT; i++) {
+			int player1TwoStreak = 0;
+			int player1ThreeStreak = 0;
+			int player2TwoStreak = 0;
+			int player2ThreeStreak = 0;
 
-					for (int j = 0; j < BOARD_WIDTH; j++) {
+			for (int j = 0; j < BOARD_WIDTH; j++) {
 
-						if (board[i][j] == 1) {
-							try {
-								if (((i + 1) < BOARD_HEIGHT) && board[i+1][j] == 1) {
+				if (board[i][j] == 1) {
+					try {
+						if (((i + 1) < BOARD_HEIGHT) && board[i + 1][j] == 1) {
 
-									if (((i + 2) < BOARD_HEIGHT) && board[i+2][j] == 1) {
-										player1ThreeStreak++;
-									} else if (((i + 2) < BOARD_HEIGHT) && board[i+2][j] == 0) {
-										player1TwoStreak++;
-									} else{
-										player1TwoStreak++;
-									}
-								}
-							} catch (Exception e) {
-								continue;
+							if (((i + 2) < BOARD_HEIGHT)
+									&& board[i + 2][j] == 1) {
+								player1ThreeStreak++;
+							} else if (((i + 2) < BOARD_HEIGHT)
+									&& board[i + 2][j] == 0) {
+								player1TwoStreak++;
+							} else {
+								player1TwoStreak++;
 							}
-						} else if (board[i][j] == 2) {
-							try {
-								if (((i + 1) < BOARD_HEIGHT) && board[i+1][j] == 2) {
-
-									if (((i + 2) < BOARD_HEIGHT) && board[i+2][j] == 2) {
-										player2ThreeStreak++;
-
-									} else if (((i + 2) < BOARD_HEIGHT) && board[i+2][j] == 0) {
-										player2TwoStreak++;
-									}
-									else{
-										player2TwoStreak++;
-									}
-								}
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-
 						}
-						player1TwoInARows += player1TwoStreak;
-						player1ThreeInARows += player1ThreeStreak;
-						player2TwoInARows += player2TwoStreak;
-						player2ThreeInARows += player2ThreeStreak;
-
-						player1TwoStreak = player1ThreeStreak = player2TwoStreak = player2ThreeStreak = 0;
+					} catch (Exception e) {
+						continue;
 					}
+				} else if (board[i][j] == 2) {
+					try {
+						if (((i + 1) < BOARD_HEIGHT) && board[i + 1][j] == 2) {
+
+							if (((i + 2) < BOARD_HEIGHT)
+									&& board[i + 2][j] == 2) {
+								player2ThreeStreak++;
+
+							} else if (((i + 2) < BOARD_HEIGHT)
+									&& board[i + 2][j] == 0) {
+								player2TwoStreak++;
+							} else {
+								player2TwoStreak++;
+							}
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
 				}
+				player1TwoInARows += player1TwoStreak;
+				player1ThreeInARows += player1ThreeStreak;
+				player2TwoInARows += player2TwoStreak;
+				player2ThreeInARows += player2ThreeStreak;
+
+				player1TwoStreak = player1ThreeStreak = player2TwoStreak = player2ThreeStreak = 0;
+			}
+		}
 
 		// Ideas for heuristics:
 
 		// How many pieces each one has in the middle of the board
 
-		// How many 3 in a rows the person has (vertically, horizontally)
-		// How many 2 in a rows the person has (vertically, horizontally)
-
 		// How many total pieces are on the board (inverse relationship, the
 		// more there are, the lower the heuristic
+		// Total number of potential connect4's
 
 		System.out.println("player1TwoInARows: " + player1TwoInARows);
 		System.out.println("player1ThreeInARows: " + player1ThreeInARows);
 		System.out.println("player2TwoInARows: " + player2TwoInARows);
 		System.out.println("player2ThreeInARows: " + player2ThreeInARows);
+		System.out.println("player1TotalPieces: " + player1TotalCount);
+		System.out.println("player2TotalPieces: " + player2TotalCount);
 
 	}
 
