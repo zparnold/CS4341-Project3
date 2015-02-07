@@ -54,7 +54,7 @@ public class Main {
 			br = new BufferedReader(new FileReader(csvFile));
 			BufferedWriter writer = new BufferedWriter(new FileWriter(outPath));
 			while ((line = br.readLine()) != null) {
-				if (count > 0){
+				if (count > 5 && count < 10){
 				int[][] stringBoard = new int[BOARD_HEIGHT][BOARD_WIDTH];
 				String[] holder = line.split(csvSplitBy);
 				int whoWon = Integer.parseInt(holder[holder.length - 1]);
