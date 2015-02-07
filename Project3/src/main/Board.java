@@ -154,7 +154,16 @@ public class Board {
 		// Ideas for heuristics:
 
 		// How many pieces each one has in the middle of the board
-
+		int player1MiddleCount = 0, player2MiddleCount = 0;
+		for(int i = 1; i < BOARD_HEIGHT-1; i++){
+			for(int j = 1; j < BOARD_WIDTH-1; j++){
+				if(board[i][j] == 1){
+					player1MiddleCount++;
+				}else if(board[i][j] == 2){
+					player2MiddleCount++;
+				}
+			}
+		}
 		// How many 3 in a rows the person has (vertically, horizontally)
 		// How many 2 in a rows the person has (vertically, horizontally)
 
@@ -165,6 +174,8 @@ public class Board {
 		System.out.println("player1ThreeInARows: " + player1ThreeInARows);
 		System.out.println("player2TwoInARows: " + player2TwoInARows);
 		System.out.println("player2ThreeInARows: " + player2ThreeInARows);
+		System.out.println("player1MiddleCount: " + player1MiddleCount);
+		System.out.println("player2MiddleCount: " + player2MiddleCount);
 
 	}
 
