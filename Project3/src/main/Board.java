@@ -8,7 +8,7 @@ package main;
  *
  */
 public class Board {
-
+	
 	// Class vars
 	private int[][] board = null;
 
@@ -92,7 +92,7 @@ public class Board {
 							}
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
+						continue;
 					}
 
 				}
@@ -147,7 +147,7 @@ public class Board {
 							}
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
+						continue;
 					}
 
 				}
