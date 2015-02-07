@@ -160,13 +160,20 @@ public class Board {
 			}
 		}
 
-		// Ideas for heuristics:
+		// Ideas for features:
 
 		// How many pieces each one has in the middle of the board
+		// - Which player has the more pieces in the middle (n-1) from the edge
 
 		// How many total pieces are on the board (inverse relationship, the
-		// more there are, the lower the heuristic
+		// more there are, the lower the heuristic)
+		
 		// Total number of potential connect4's
+
+		// PLAYER 1 WENT FIRST
+		
+		// Number of owned rows or columns
+		// (one player per column/row)
 
 		System.out.println("player1TwoInARows: " + player1TwoInARows);
 		System.out.println("player1ThreeInARows: " + player1ThreeInARows);
