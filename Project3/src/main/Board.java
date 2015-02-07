@@ -168,9 +168,7 @@ public class Board {
 			}
 		}
 
-<<<<<<< HEAD
-		
-=======
+
 		// Column and row dominance
 		int player1RowDominance = 0, player1ColumnDominance = 0, player2RowDominance = 0, player2ColumnDominance = 0;
 		int player1Total, player2Total;
@@ -215,7 +213,6 @@ public class Board {
 			}
 		}
 
->>>>>>> branch 'master' of https://github.com/zparnold/CS4341-Project3.git
 		// Ideas for heuristics:
 
 		// How many total pieces are on the board (inverse relationship, the
@@ -243,16 +240,15 @@ public class Board {
 		System.out.println("player2ThreeInARows: " + player2ThreeInARows);
 		System.out.println("player1MiddleCount: " + player1MiddleCount);
 		System.out.println("player2MiddleCount: " + player2MiddleCount);
-<<<<<<< HEAD
+
 		System.out.println("p1possibleConnect4: " + p1possibleConnect4);
 		System.out.println("p2possibleConnect4: " + p2possibleConnect4);
 
-=======
+
 		System.out.println("player1RowDominance: " + player1RowDominance);
 		System.out.println("player2RowDominance: " + player2RowDominance);
 		System.out.println("player1ColumnDominance: " + player1ColumnDominance);
 		System.out.println("player2ColumnDominance: " + player2ColumnDominance);
->>>>>>> branch 'master' of https://github.com/zparnold/CS4341-Project3.git
 	}
 
 	// Getters and Setters
