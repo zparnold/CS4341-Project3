@@ -63,9 +63,10 @@ public class Board {
 
 							if (((j + 2) < BOARD_WIDTH) && board[i][j + 2] == 1) {
 								player1ThreeStreak++;
-							} else if (((j + 2) < BOARD_WIDTH) && board[i][j + 2] == 0) {
+							} else if (((j + 2) < BOARD_WIDTH)
+									&& board[i][j + 2] == 0) {
 								player1TwoStreak++;
-							} else{
+							} else {
 								player1TwoStreak++;
 							}
 						}
@@ -79,14 +80,15 @@ public class Board {
 							if (((j + 2) < BOARD_WIDTH) && board[i][j + 2] == 2) {
 								player2ThreeStreak++;
 
-							} else if (((j + 2) < BOARD_WIDTH) && board[i][j + 2] == 0) {
+							} else if (((j + 2) < BOARD_WIDTH)
+									&& board[i][j + 2] == 0) {
 								player2TwoStreak++;
-							} else{
+							} else {
 								player2TwoStreak++;
 							}
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
+						continue;
 					}
 
 				}
@@ -100,76 +102,121 @@ public class Board {
 		}
 
 		// Count VERTICAL pieces in a row
-				for (int i = 0; i < BOARD_HEIGHT; i++) {
-					int player1TwoStreak = 0;
-					int player1ThreeStreak = 0;
-					int player2TwoStreak = 0;
-					int player2ThreeStreak = 0;
+		for (int i = 0; i < BOARD_HEIGHT; i++) {
+			int player1TwoStreak = 0;
+			int player1ThreeStreak = 0;
+			int player2TwoStreak = 0;
+			int player2ThreeStreak = 0;
 
-					for (int j = 0; j < BOARD_WIDTH; j++) {
+			for (int j = 0; j < BOARD_WIDTH; j++) {
 
-						if (board[i][j] == 1) {
-							try {
-								if (((i + 1) < BOARD_HEIGHT) && board[i+1][j] == 1) {
+				if (board[i][j] == 1) {
+					try {
+						if (((i + 1) < BOARD_HEIGHT) && board[i + 1][j] == 1) {
 
-									if (((i + 2) < BOARD_HEIGHT) && board[i+2][j] == 1) {
-										player1ThreeStreak++;
-									} else if (((i + 2) < BOARD_HEIGHT) && board[i+2][j] == 0) {
-										player1TwoStreak++;
-									} else{
-										player1TwoStreak++;
-									}
-								}
-							} catch (Exception e) {
-								continue;
+							if (((i + 2) < BOARD_HEIGHT)
+									&& board[i + 2][j] == 1) {
+								player1ThreeStreak++;
+							} else if (((i + 2) < BOARD_HEIGHT)
+									&& board[i + 2][j] == 0) {
+								player1TwoStreak++;
+							} else {
+								player1TwoStreak++;
 							}
-						} else if (board[i][j] == 2) {
-							try {
-								if (((i + 1) < BOARD_HEIGHT) && board[i+1][j] == 2) {
-
-									if (((i + 2) < BOARD_HEIGHT) && board[i+2][j] == 2) {
-										player2ThreeStreak++;
-
-									} else if (((i + 2) < BOARD_HEIGHT) && board[i+2][j] == 0) {
-										player2TwoStreak++;
-									}
-									else{
-										player2TwoStreak++;
-									}
-								}
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-
 						}
-						player1TwoInARows += player1TwoStreak;
-						player1ThreeInARows += player1ThreeStreak;
-						player2TwoInARows += player2TwoStreak;
-						player2ThreeInARows += player2ThreeStreak;
-
-						player1TwoStreak = player1ThreeStreak = player2TwoStreak = player2ThreeStreak = 0;
+					} catch (Exception e) {
+						continue;
 					}
-				}
+				} else if (board[i][j] == 2) {
+					try {
+						if (((i + 1) < BOARD_HEIGHT) && board[i + 1][j] == 2) {
 
-				
+							if (((i + 2) < BOARD_HEIGHT)
+									&& board[i + 2][j] == 2) {
+								player2ThreeStreak++;
+
+							} else if (((i + 2) < BOARD_HEIGHT)
+									&& board[i + 2][j] == 0) {
+								player2TwoStreak++;
+							} else {
+								player2TwoStreak++;
+							}
+						}
+					} catch (Exception e) {
+						continue;
+					}
+
+				}
+				player1TwoInARows += player1TwoStreak;
+				player1ThreeInARows += player1ThreeStreak;
+				player2TwoInARows += player2TwoStreak;
+				player2ThreeInARows += player2ThreeStreak;
+
+				player1TwoStreak = player1ThreeStreak = player2TwoStreak = player2ThreeStreak = 0;
+			}
+		}
+
+		// How many does each player have in the middle?
 		int player1MiddleCount = 0, player2MiddleCount = 0;
-		for(int i = 1; i < BOARD_HEIGHT-1; i++){
-			for(int j = 1; j < BOARD_WIDTH-1; j++){
-				if(board[i][j] == 1){
+		for (int i = 1; i < BOARD_HEIGHT - 1; i++) {
+			for (int j = 1; j < BOARD_WIDTH - 1; j++) {
+				if (board[i][j] == 1) {
 					player1MiddleCount++;
-				}else if(board[i][j] == 2){
+				} else if (board[i][j] == 2) {
 					player2MiddleCount++;
 				}
 			}
 		}
 
+<<<<<<< HEAD
 		
+=======
+		// Column and row dominance
+		int player1RowDominance = 0, player1ColumnDominance = 0, player2RowDominance = 0, player2ColumnDominance = 0;
+		int player1Total, player2Total;
+
+		// loop over the rows and columns looking for domination
+		// This one is row based
+		for (int i = 0; i < BOARD_HEIGHT; i++) {
+			player1Total = player2Total = 0;
+
+			for (int j = 0; j < BOARD_WIDTH; j++) {
+				if (board[i][j] == 1) {
+					player1Total++;
+				} else if (board[i][j] == 2) {
+					player2Total++;
+				}
+			}
+			// Simple enough to understand I think
+			if (player1Total > player2Total) {
+				player1RowDominance++;
+			} else if (player2Total > player1Total) {
+				player2RowDominance++;
+			}
+		}
+
+		// This one is column based
+
+		for (int j = 0; j < BOARD_WIDTH; j++) {
+			player1Total = player2Total = 0;
+
+			for (int i = 0; i < BOARD_HEIGHT; i++) {
+				if (board[i][j] == 1) {
+					player1Total++;
+				} else if (board[i][j] == 2) {
+					player2Total++;
+				}
+			}
+			// Simple enough to understand I think
+			if (player1Total > player2Total) {
+				player1ColumnDominance++;
+			} else if (player2Total > player1Total) {
+				player2ColumnDominance++;
+			}
+		}
+
+>>>>>>> branch 'master' of https://github.com/zparnold/CS4341-Project3.git
 		// Ideas for heuristics:
-
-		// How many pieces each one has in the middle of the board
-
-		// How many 3 in a rows the person has (vertically, horizontally)
-		// How many 2 in a rows the person has (vertically, horizontally)
 
 		// How many total pieces are on the board (inverse relationship, the
 		// more there are, the lower the heuristic
@@ -196,9 +243,16 @@ public class Board {
 		System.out.println("player2ThreeInARows: " + player2ThreeInARows);
 		System.out.println("player1MiddleCount: " + player1MiddleCount);
 		System.out.println("player2MiddleCount: " + player2MiddleCount);
+<<<<<<< HEAD
 		System.out.println("p1possibleConnect4: " + p1possibleConnect4);
 		System.out.println("p2possibleConnect4: " + p2possibleConnect4);
 
+=======
+		System.out.println("player1RowDominance: " + player1RowDominance);
+		System.out.println("player2RowDominance: " + player2RowDominance);
+		System.out.println("player1ColumnDominance: " + player1ColumnDominance);
+		System.out.println("player2ColumnDominance: " + player2ColumnDominance);
+>>>>>>> branch 'master' of https://github.com/zparnold/CS4341-Project3.git
 	}
 
 	// Getters and Setters
