@@ -85,15 +85,20 @@ public class Main {
 					}
 
 					newBoard.evaluate();
-					// System.out.println("Line: "+line);
-					// System.out.println(Arrays.deepToString(stringBoard));
+					
+					//now get the evaluation in string format
+					StringBuilder eval = new StringBuilder();
+					
+					for(Integer score:newBoard.getEvaluation()){
+						eval.append(",");
+						eval.append(score.toString());
+					}
 
-					// printBoard(line);
 					// write now back to the file
 
+					line = line + eval;
 					writer.write(line);
 					writer.newLine();
-					// writer.write(newBoard.getEvaluation().toString());
 				}
 				count++;
 			}
@@ -117,13 +122,5 @@ public class Main {
 		System.out.println("Done");
 	}
 
-	private void printBoard(String board) {
-		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < 7; j++) {
-				System.out.print(board.charAt((i * 7) + j) + " ");
-			}
-			System.out.print("\n");
-		}
-	}
 
 }
