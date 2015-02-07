@@ -163,6 +163,7 @@ public class Board {
 			}
 		}
 
+		
 		// Ideas for heuristics:
 
 		// How many pieces each one has in the middle of the board
@@ -172,17 +173,123 @@ public class Board {
 
 		// How many total pieces are on the board (inverse relationship, the
 		// more there are, the lower the heuristic
-
+		
+		//Potential Connect 4's
+		int p1possibleConnect4 = 0, p2possibleConnect4 = 0;
+		for(int i = 0; i < BOARD_HEIGHT; i++){
+			for(int j = 0; j < BOARD_WIDTH; j++){
+				if(board[i][j] == 1){
+					p1possibleConnect4 += checkConnect4(1, i, j, board);
+						
+				}
+				
+				if(board[i][j] == 2){
+					p2possibleConnect4 += checkConnect4(2, i, j, board);
+						
+				}
+			}
+		}
+		
 		System.out.println("player1TwoInARows: " + player1TwoInARows);
 		System.out.println("player1ThreeInARows: " + player1ThreeInARows);
 		System.out.println("player2TwoInARows: " + player2TwoInARows);
 		System.out.println("player2ThreeInARows: " + player2ThreeInARows);
 		System.out.println("player1MiddleCount: " + player1MiddleCount);
 		System.out.println("player2MiddleCount: " + player2MiddleCount);
+		System.out.println("p1possibleConnect4: " + p1possibleConnect4);
+		System.out.println("p2possibleConnect4: " + p2possibleConnect4);
 
 	}
 
 	// Getters and Setters
+	/**
+	 * Check the surrounding positions of a board and return a boolean if there is a possible connect4
+	 * @param player
+	 * @param x Coord
+	 * @param y Coord
+	 * @param b Board
+	 * @return
+	 */
+	private int checkConnect4(int player, int x, int y, int[][] b) {
+		/*
+		 * We get a position. Check from position whether or not there is a connect4
+		 * We check by checking the four surrounding spaces of a space for a potential connect4
+		 * 	0,0,0,?,0,?,0,
+			0,0,0,?,?,0,0,
+			?,?,?,X,?,?,?,
+			0,0,?,?,0,0,0,
+			0,?,0,?,0,0,0,
+			?,0,0,?,0,0,0,
+		 */
+		//If this function is called, a piece was found
+		int currentStreak = 1;
+		int searchDepth = 3;
+		int possibleConnect4 = 0;
+		
+		//Horizontal
+		//Going right. If greater than board width, break
+		for(int i = 1; i <= searchDepth; i++){
+			if(y + i >= BOARD_WIDTH || (board[x][y + i] != player && board[x][y + i] > 0)){
+				break;
+			}
+			if(board[x][y + i] == player || board[x][y + i] == 0){
+				currentStreak++;
+				
+				if(currentStreak == 4){
+					currentStreak = 1;
+					possibleConnect4++;
+				}
+			}
+		}
+		
+		//Going left. If less than 0, break.
+		for(int i = searchDepth; i >= 0; i--){
+			if(y - i < 0 || (board[x][y - i] != player && board[x][y - i] > 0)){
+				break;
+			}
+			if(board[x][y - i] == player || board[x][y - i] == 0){
+				currentStreak++;
+				
+				if(currentStreak == 4){
+					currentStreak = 1;
+					possibleConnect4++;
+				}
+			}
+		}
+		
+		//Vertical
+		//Going Down. If greater than board width, break
+		for(int i = 1; i <= searchDepth; i++){
+			if(x + i >= BOARD_HEIGHT || (board[x + i][y] != player && board[x + i][y] > 0)){
+				break;
+			}
+			if(board[x + i][y] == player || board[x + i][y] == 0){
+				currentStreak++;
+				
+				if(currentStreak == 4){
+					currentStreak = 1;
+					possibleConnect4++;
+				}
+			}
+		}
+		
+		//Going Up. If less than 0, break.
+		for(int i = searchDepth; i >= 0; i--){
+			if(x - i < 0 || (board[x - i][y] != player && board[x - i][y] > 0)){
+				break;
+			}
+			if(board[x - i][y] == player || board[x - i][y] == 0){
+				currentStreak++;
+				
+				if(currentStreak == 4){
+					currentStreak = 1;
+					possibleConnect4++;
+				}
+			}
+		}
+		//possibleConnect4 = currentStreak/4;
+		return possibleConnect4;
+	}
 
 	/**
 	 * @return the evaluation
