@@ -213,6 +213,50 @@ public class Board {
 			}
 		}
 
+		//Player Isolation Feature:
+		//If one player has a row or column to themselves with no other pieces
+		// in it other than their own, does it make a difference?
+		int player1RowsOwned = 0, player2RowsOwned = 0;
+		int player1ColOwned = 0, player2ColOwned = 0;
+		for (int i = 0; i < BOARD_HEIGHT; i++) {
+			//Check 
+			int p1Count = 0, p2Count = 0;
+			for (int j = 0; j < BOARD_WIDTH; j++) {
+				if (board[i][j] == 1) {
+					p1Count++;
+				} else if (board[i][j] == 2) {
+					p2Count++;
+				}
+			}
+			
+			if(p1Count == 0 && p2Count == 0)
+				continue;
+			
+			if(p1Count == 0 && p2Count > 0){
+				player2RowsOwned++;
+			} else if(p2Count == 0 && p1Count > 0){
+				player1RowsOwned++;
+			}
+		}
+		
+		for (int i = 0; i < BOARD_WIDTH; i++) {
+			//Check 
+			int p1Count = 0, p2Count = 0;
+			for (int j = 0; j < BOARD_HEIGHT; j++) {
+				if (board[j][i] == 1) {
+					p1Count++;
+				} else if (board[j][i] == 2) {
+					p2Count++;
+				}
+			}
+			
+			if(p1Count == 0 && p2Count > 0){
+				player2ColOwned++;
+			} else if(p2Count == 0 && p1Count > 0){
+				player1ColOwned++;
+			}
+		}
+		
 		// Ideas for heuristics:
 
 		// How many total pieces are on the board (inverse relationship, the
@@ -244,11 +288,15 @@ public class Board {
 		System.out.println("p1possibleConnect4: " + p1possibleConnect4);
 		System.out.println("p2possibleConnect4: " + p2possibleConnect4);
 
-
 		System.out.println("player1RowDominance: " + player1RowDominance);
 		System.out.println("player2RowDominance: " + player2RowDominance);
 		System.out.println("player1ColumnDominance: " + player1ColumnDominance);
 		System.out.println("player2ColumnDominance: " + player2ColumnDominance);
+		
+		System.out.println("player1RowsOwned: " + player1RowsOwned);
+		System.out.println("player2RowsOwned: " + player2RowsOwned);
+		System.out.println("player1ColOwned: " + player1ColOwned);
+		System.out.println("player2ColOwned: " + player2ColOwned);
 	}
 
 	// Getters and Setters
