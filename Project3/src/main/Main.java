@@ -20,7 +20,8 @@ import java.util.Arrays;
 public class Main {
 
 	// Class vars
-
+	private static int BOARD_WIDTH = 7;
+	private static int BOARD_HEIGHT = 6;
 	/**
 	 * @param args
 	 * @throws IOException
@@ -53,8 +54,8 @@ public class Main {
 			br = new BufferedReader(new FileReader(csvFile));
 			BufferedWriter writer = new BufferedWriter(new FileWriter(outPath));
 			while ((line = br.readLine()) != null) {
-				if (count > 0 && count < 2){
-				int[][] stringBoard = new int[6][7];
+				if (count > 0){
+				int[][] stringBoard = new int[BOARD_HEIGHT][BOARD_WIDTH];
 				String[] holder = line.split(csvSplitBy);
 				int whoWon = Integer.parseInt(holder[holder.length - 1]);
 
@@ -63,13 +64,26 @@ public class Main {
 				// Don't forget that the last column is an eval of who won.
 				for (int i = 0; i < 6; i++) {
 					for (int j = 0; j < 7; j++) {
-						stringBoard[i][j] = Integer.parseInt(holder[(i*7) + j]);
+						stringBoard[i][j] = Integer.parseInt(holder[(i*BOARD_WIDTH) + j]);
 					}
 				}
 				
+				
 				Board newBoard = new Board(stringBoard, whoWon);
+				
+				System.out.println("Board:");
+				for (int[] s : stringBoard){
+					for (int i : s){
+						System.out.print(i + ",");
+					}
+					System.out.println();
+				}
+				
 				newBoard.evaluate();
-
+				//System.out.println("Line: "+line);
+				//System.out.println(Arrays.deepToString(stringBoard));
+				
+				//printBoard(line);
 				// write now back to the file
 
 				writer.write(line);
@@ -96,6 +110,15 @@ public class Main {
 		}
 
 		System.out.println("Done");
+	}
+	
+	private void printBoard(String board){
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				System.out.print(board.charAt((i*7)+j) + " ");
+			}
+			System.out.print("\n");
+		}
 	}
 
 }
