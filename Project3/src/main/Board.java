@@ -388,6 +388,76 @@ public class Board {
 				}
 			}
 		}
+		
+		//Diagonals
+		//Going Down-Right. If greater than board width, break
+		currentStreak = 1;
+		for(int i = 1; i <= searchDepth; i++){
+			if((x + i >= BOARD_HEIGHT || y + i >= BOARD_HEIGHT) 
+					|| (board[x + i][y] != player && board[x + i][y] > 0)){
+				break;
+			}
+			if(board[x + i][y + i] == player || board[x + i][y + i] == 0){
+				currentStreak++;
+				
+				if(currentStreak == 4){
+					currentStreak = 1;
+					possibleConnect4++;
+				}
+			}
+		}
+		
+		//Going Down-Left. If greater than board width, break
+		currentStreak = 1;
+		for(int i = 1; i <= searchDepth; i++){
+			if((x - i < 0 || y + i >= BOARD_HEIGHT) 
+					|| (board[x - i][y + i] != player && board[x - i][y + i] > 0)){
+				break;
+			}
+			if(board[x - i][y + i] == player || board[x - i][y + i] == 0){
+				currentStreak++;
+				
+				if(currentStreak == 4){
+					currentStreak = 1;
+					possibleConnect4++;
+				}
+			}
+		}
+		
+		//Going Up-Right. If greater than board width, break
+		currentStreak = 1;
+		for(int i = 1; i <= searchDepth; i++){
+			if((y - i < 0 || x + i >= BOARD_HEIGHT) 
+					|| (board[x + i][y - i] != player && board[x + i][y - i] > 0)){
+				break;
+			}
+			if(board[x + i][y - i] == player || board[x + i][y - i] == 0){
+				currentStreak++;
+				
+				if(currentStreak == 4){
+					currentStreak = 1;
+					possibleConnect4++;
+				}
+			}
+		}
+		
+		//Going Up-Left. If less than 0, break.
+		currentStreak = 1;
+		for(int i = searchDepth; i >= 0; i--){
+			if((x - i < 0 || y - i < 0) 
+					|| (board[x - i][y - i] != player && board[x - i][y - i] > 0)){
+				break;
+			}
+			if(board[x - i][y - i] == player || board[x - i][y - i] == 0){
+				currentStreak++;
+				
+				if(currentStreak == 4){
+					currentStreak = 1;
+					possibleConnect4++;
+				}
+			}
+		}
+
 		//possibleConnect4 = currentStreak/4;
 		return possibleConnect4;
 	}
