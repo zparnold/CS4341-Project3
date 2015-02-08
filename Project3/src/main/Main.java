@@ -60,7 +60,7 @@ public class Main {
 					outFilePath));
 			
 			//Add headers to outfile
-			String[] header = {"a1,a2,a3,a4,a5,a6,a7,b1,b2,b3,b4,b5,b6,b7,c1,c2,c3,c4,c5,c6,c7,d1,d2,d3,d4,d5,d6,d7,e1,e2,e3,e4,e5,e6,e7,f1,f2,f3,f4,f5,f6,f7,result,p1Two,p1Three,p2Two,p2Three,p1Mid,p2Mid,p1RowDom,p2RowDom,p1ColDom,p2ColDom,p1Con4,p2Con4,total"};
+			String[] header = {"a1,a2,a3,a4,a5,a6,a7,b1,b2,b3,b4,b5,b6,b7,c1,c2,c3,c4,c5,c6,c7,d1,d2,d3,d4,d5,d6,d7,e1,e2,e3,e4,e5,e6,e7,f1,f2,f3,f4,f5,f6,f7,result,p1Two,p1Three,p2Two,p2Three,p1Mid,p2Mid,p1RowDom,p2RowDom,p1ColDom,p2ColDom,p1Con4,p2Con4,total,wekaWon"};
 			writer.write(Arrays.toString(header));
 			writer.newLine();
 			while ((line = br.readLine()) != null) {
@@ -98,6 +98,11 @@ public class Main {
 						eval.append(",");
 						eval.append(score.toString());
 					}
+					//Because WEKA is kinda rough with the way it handles
+					//Input data as attributes we have to call player 1
+					//"a" and player 2 "b"
+					eval.append(",");
+					eval.append(newBoard.getWhoWon()==1?"a":"b");
 
 					// write now back to the file
 
