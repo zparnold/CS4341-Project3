@@ -58,8 +58,13 @@ public class Main {
 			br = new BufferedReader(new FileReader(csvFile));
 			BufferedWriter writer = new BufferedWriter(new FileWriter(
 					outFilePath));
+			
+			//Add headers to outfile
+			String[] header = {"a1,a2,a3,a4,a5,a6,a7,b1,b2,b3,b4,b5,b6,b7,c1,c2,c3,c4,c5,c6,c7,d1,d2,d3,d4,d5,d6,d7,e1,e2,e3,e4,e5,e6,e7,f1,f2,f3,f4,f5,f6,f7,result,p1Two,p2Two,p1Threep,2Threep,1Mid,p2Mid,p1RowDom,p2RowDom,p1ColDom,p2ColDom,total"};
+			writer.write(Arrays.toString(header));
+			writer.newLine();
 			while ((line = br.readLine()) != null) {
-				if (count > 5 && count < 10) {
+				if (count > 0) {
 					int[][] stringBoard = new int[BOARD_HEIGHT][BOARD_WIDTH];
 					String[] holder = line.split(csvSplitBy);
 					int whoWon = Integer.parseInt(holder[holder.length - 1]);
@@ -85,15 +90,20 @@ public class Main {
 					}
 
 					newBoard.evaluate();
-					// System.out.println("Line: "+line);
-					// System.out.println(Arrays.deepToString(stringBoard));
 
-					// printBoard(line);
+					// now get the evaluation in string format
+					StringBuilder eval = new StringBuilder();
+
+					for (Integer score : newBoard.getEvaluation()) {
+						eval.append(",");
+						eval.append(score.toString());
+					}
+
 					// write now back to the file
 
+					line = line + eval;
 					writer.write(line);
 					writer.newLine();
-					// writer.write(newBoard.getEvaluation().toString());
 				}
 				count++;
 			}
@@ -115,15 +125,6 @@ public class Main {
 		}
 
 		System.out.println("Done");
-	}
-
-	private void printBoard(String board) {
-		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < 7; j++) {
-				System.out.print(board.charAt((i * 7) + j) + " ");
-			}
-			System.out.print("\n");
-		}
 	}
 
 }

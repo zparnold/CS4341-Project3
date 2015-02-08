@@ -3,6 +3,8 @@
  */
 package main;
 
+import java.util.ArrayList;
+
 /**
  * @author zparnold ssmaceachern
  *
@@ -10,9 +12,9 @@ package main;
 public class Board {
 
 	// Class vars
-	private int[][] board = null;
+	private int[][] board;
 
-	private int[] evaluation = new int[4];
+	private ArrayList<Integer> evaluation = new ArrayList<Integer>();
 	private int whoWon = 0;
 
 	private static int BOARD_WIDTH = 7;
@@ -47,6 +49,8 @@ public class Board {
 		int player2TwoInARows = 0;
 		int player1ThreeInARows = 0;
 		int player2ThreeInARows = 0;
+		
+		int totalPieces = 0;
 
 		// Count Horizontal pieces in a row
 		for (int i = 0; i < BOARD_HEIGHT; i++) {
@@ -58,6 +62,7 @@ public class Board {
 			for (int j = 0; j < BOARD_WIDTH; j++) {
 
 				if (board[i][j] == 1) {
+					totalPieces++;
 					try {
 						if (((j + 1) < BOARD_WIDTH) && board[i][j + 1] == 1) {
 
@@ -74,6 +79,7 @@ public class Board {
 						continue;
 					}
 				} else if (board[i][j] == 2) {
+					totalPieces++;
 					try {
 						if (((j + 1) < BOARD_WIDTH) && board[i][j + 1] == 2) {
 
@@ -292,11 +298,21 @@ public class Board {
 		System.out.println("player2RowDominance: " + player2RowDominance);
 		System.out.println("player1ColumnDominance: " + player1ColumnDominance);
 		System.out.println("player2ColumnDominance: " + player2ColumnDominance);
+		System.out.println("TotalPiecesOnBoard: " + totalPieces);
 		
-		System.out.println("player1RowsOwned: " + player1RowsOwned);
-		System.out.println("player2RowsOwned: " + player2RowsOwned);
-		System.out.println("player1ColOwned: " + player1ColOwned);
-		System.out.println("player2ColOwned: " + player2ColOwned);
+		evaluation.add(player1TwoInARows);
+		evaluation.add(player1ThreeInARows);
+		evaluation.add(player2TwoInARows);
+		evaluation.add(player2ThreeInARows);
+		evaluation.add(player1MiddleCount);
+		evaluation.add(player2MiddleCount);
+		evaluation.add(player1RowDominance);
+		evaluation.add(player2RowDominance);
+		evaluation.add(player1ColumnDominance);
+		evaluation.add(player2ColumnDominance);
+		evaluation.add(p1possibleConnect4);
+		evaluation.add(p2possibleConnect4);
+		evaluation.add(totalPieces);
 	}
 
 	// Getters and Setters
@@ -465,17 +481,10 @@ public class Board {
 	/**
 	 * @return the evaluation
 	 */
-	public int[] getEvaluation() {
+	public ArrayList<Integer> getEvaluation() {
 		return evaluation;
 	}
 
-	/**
-	 * @param evaluation
-	 *            the evaluation to set
-	 */
-	private void setEvaluation(int[] evaluation) {
-		this.evaluation = evaluation;
-	}
 
 	/**
 	 * @return the board
