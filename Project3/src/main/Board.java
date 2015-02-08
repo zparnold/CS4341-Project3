@@ -267,8 +267,7 @@ public class Board {
 
 		// How many total pieces are on the board (inverse relationship, the
 		// more there are, the lower the heuristic
-		
-		//Potential Connect 4's
+
 		int p1possibleConnect4 = 0, p2possibleConnect4 = 0;
 		for(int i = 0; i < BOARD_HEIGHT; i++){
 			for(int j = 0; j < BOARD_WIDTH; j++){
@@ -317,6 +316,11 @@ public class Board {
 		
 		evaluation.add(p1possibleConnect4);
 		evaluation.add(p2possibleConnect4);
+		
+		evaluation.add(player1RowsOwned);
+		evaluation.add(player2RowsOwned);
+		evaluation.add(player1ColOwned);
+		evaluation.add(player2ColOwned);
 		
 		evaluation.add(totalPieces);
 	}
