@@ -310,8 +310,8 @@ public class Board {
 		evaluation.add(player2RowDominance);
 		evaluation.add(player1ColumnDominance);
 		evaluation.add(player2ColumnDominance);
-		//evaluation.add(player1PotentialConnect4);
-		//evaluation.add(player2PotentialConnect4);
+		evaluation.add(p1possibleConnect4);
+		evaluation.add(p2possibleConnect4);
 		evaluation.add(totalPieces);
 	}
 
