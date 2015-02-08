@@ -302,16 +302,22 @@ public class Board {
 		
 		evaluation.add(player1TwoInARows);
 		evaluation.add(player1ThreeInARows);
+		
 		evaluation.add(player2TwoInARows);
 		evaluation.add(player2ThreeInARows);
+		
 		evaluation.add(player1MiddleCount);
 		evaluation.add(player2MiddleCount);
+		
 		evaluation.add(player1RowDominance);
 		evaluation.add(player2RowDominance);
+		
 		evaluation.add(player1ColumnDominance);
 		evaluation.add(player2ColumnDominance);
+		
 		evaluation.add(p1possibleConnect4);
 		evaluation.add(p2possibleConnect4);
+		
 		evaluation.add(totalPieces);
 	}
 
